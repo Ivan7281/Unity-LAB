@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    
+    private int collisionCount = 0;
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Died");
+        Debug.Log("Player collided with obstacle");
+        collisionCount++;
+    }
+    public int GetCollisionCount()
+    {
+        return collisionCount;
     }
 }
