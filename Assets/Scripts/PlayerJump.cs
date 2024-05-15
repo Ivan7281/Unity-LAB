@@ -6,13 +6,13 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour
 {
 
-    [SerializeField] private float L = 1f;
+    [SerializeField] private float L = 1f; 
     [SerializeField] private float H = 1f;
     [SerializeField] private float T = 1f;
     [SerializeField] bool isJumping = false;
-    private CheckGround isGround;
+    private JumpCheck jumpCheck;
 
-        private float CalculateY(float x)
+    private float CalculateY(float x)
         {
             return -4 * H / (L * L) * (x - L) * x;
         }
@@ -36,13 +36,13 @@ public class PlayerJump : MonoBehaviour
 
     private void Start()
     {
-        isGround = gameObject.GetComponentInChildren<CheckGround>();
+        jumpCheck = GetComponent<JumpCheck>();
     }
 
     void Update()
         {
 
-            if (Input.GetButtonDown("Jump") && isGround.IsOnGround)
+            if (Input.GetKeyDown(KeyCode.Space) && jumpCheck.CanJump() && !isJumping)
             {
                 isJumping = true;
                 startPos = transform.position;
